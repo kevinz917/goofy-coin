@@ -8,7 +8,7 @@ export const NETWORK_ACTIONS = {
   FETCH_MOCK_ITEM_START: 'START_FETCH_MOCK_ITEM',
   FETCH_MOCK_ITEM_SUCCESS: 'FETCH_MOCK_ITEM_SUCCESS',
 
-  SET_DECENTRAGRAM: 'SET_DECENTRAGRAM',
+  SET_TOKEN_SALE_CONTRACT: 'SET_TOKEN_SALE_CONTRACT',
 
   SET_IMAGES: 'SET_IMAGES',
 
@@ -29,8 +29,8 @@ export default {
     return actionCreator(NETWORK_ACTIONS.FETCH_MOCK_ITEM_SUCCESS, { item });
   },
 
-  setDecentagramContract(contract: any): Action {
-    return actionCreator(NETWORK_ACTIONS.SET_DECENTRAGRAM, { contract });
+  setTokenSaleContract(contract: any): Action {
+    return actionCreator(NETWORK_ACTIONS.SET_TOKEN_SALE_CONTRACT, { contract });
   },
   setImages(images: any[]): Action {
     return actionCreator(NETWORK_ACTIONS.SET_IMAGES, { images });

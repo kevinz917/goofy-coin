@@ -1,5 +1,5 @@
-const Decentragram = artifacts.require("Decentragram");
+const GoofyToken = artifacts.require('GoofyToken');
 
 module.exports = function(deployer) {
-  deployer.deploy(Decentragram);
+  deployer.deploy(GoofyToken);
 };

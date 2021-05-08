@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { mainStore } from '../index';
-import Decentragram from '../abis/Decentragram.json';
+import GoofyTokenSale from '../abis/GoofyTokenSale.json';
 import networkActions from './network/networkActionCreator';
 
 export const loadWeb3 = async () => {
@@ -20,16 +20,18 @@ export const loadBlockchainData = async () => {
   const web3 = window.web3;
 
   const accounts = await window.web3.eth.getAccounts();
+  console.log('Account address: ', accounts[0]);
+
   mainStore.dispatch(networkActions.setAccount(accounts[0]));
 
   const networkId = await web3.eth.net.getId();
-  const networkData = Decentragram.networks[networkId]; //from json
+  const networkData = GoofyTokenSale.networks[networkId]; //from json
 
   if (networkData) {
     console.log('NETWORK DATA AVAILABLE!');
-    const decentragram = new web3.eth.Contract(Decentragram.abi, networkData.address);
+    const tokenSale = new web3.eth.Contract(GoofyTokenSale.abi, networkData.address);
 
-    mainStore.dispatch(networkActions.setDecentagramContract(decentragram));
+    mainStore.dispatch(networkActions.setTokenSaleContract(tokenSale));
   } else {
     window.alert('Not deployed to network');
   }

@@ -1,40 +1,43 @@
 import React, { Component } from 'react';
-import Feed from './Feed/Feed';
-import { getImagesFromNetwork } from './Util/imageDataHelpers';
+import { connect } from 'react-redux';
 import './Home.scss';
 
 interface homeOwnProps {
   loading: boolean;
 }
 
-class Home extends Component<{}, homeOwnProps> {
-  constructor(props: homeOwnProps) {
+interface mapStateOwnProps {
+  tokenSaleContract: any;
+}
+
+const mapStateToProps = (state: any): mapStateOwnProps => {
+  return {
+    tokenSaleContract: state.network.contracts.tokenSale,
+  };
+};
+
+type homeAllProps = mapStateOwnProps & homeOwnProps;
+
+class Home extends Component<homeAllProps> {
+  constructor(props: homeAllProps) {
     super(props);
+
     this.state = {
       loading: true,
     };
   }
 
   async componentDidMount() {
-    await getImagesFromNetwork();
-    this.setState({ loading: false });
+    const { tokenSaleContract } = this.props;
+
+    let tokenPrice = await tokenSaleContract.methods.tokenPrice().call();
+    let tokenSupply = await tokenSaleContract.methods.tokenSupply().call();
+    console.log(tokenPrice, tokenSupply);
   }
 
   render() {
-    return (
-      <div>
-        {this.state.loading ? (
-          <div className="loading-container">
-            <div className="body2 italic">CONNECTING TO THE NETWORK ...</div>
-          </div>
-        ) : (
-          <div>
-            <Feed />
-          </div>
-        )}
-      </div>
-    );
+    return <div>Placeholder Text</div>;
   }
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);

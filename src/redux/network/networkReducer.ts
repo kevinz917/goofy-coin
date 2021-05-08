@@ -8,7 +8,7 @@ const initialTestState = {
   account: null,
   loading: false,
   contracts: {
-    decentragram: null,
+    tokenSale: null,
   },
   images: [],
 };
@@ -27,8 +27,8 @@ export const networkReducer = produce((state, action) => {
       break;
 
     // Set contract
-    case NETWORK_ACTIONS.SET_DECENTRAGRAM:
-      state.contracts.decentragram = action.payload.contract;
+    case NETWORK_ACTIONS.SET_TOKEN_SALE_CONTRACT:
+      state.contracts.tokenSale = action.payload.contract;
       break;
     case NETWORK_ACTIONS.SET_IMAGES:
       state.images = action.payload.images;
