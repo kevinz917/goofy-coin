@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import { mainStore } from '../index';
-import GoofyTokenSale from '../abis/GoofyTokenSale.json';
+import TokenSale from '../abis/TokenSale.json';
+import Token from '../abis/GoofyToken.json';
 import networkActions from './network/networkActionCreator';
 
 export const loadWeb3 = async () => {
@@ -25,13 +26,21 @@ export const loadBlockchainData = async () => {
   mainStore.dispatch(networkActions.setAccount(accounts[0]));
 
   const networkId = await web3.eth.net.getId();
-  const networkData = GoofyTokenSale.networks[networkId]; //from json
 
-  if (networkData) {
-    console.log('NETWORK DATA AVAILABLE!');
-    const tokenSale = new web3.eth.Contract(GoofyTokenSale.abi, networkData.address);
+  const tokenSaleNetworkData = TokenSale.networks[networkId]; //from json
 
-    mainStore.dispatch(networkActions.setTokenSaleContract(tokenSale));
+  if (tokenSaleNetworkData) {
+    const tokenSaleContract = new web3.eth.Contract(TokenSale.abi, tokenSaleNetworkData.address);
+    mainStore.dispatch(networkActions.setTokenSaleContract(tokenSaleContract));
+  } else {
+    window.alert('Not deployed to network');
+  }
+
+  const tokenData = Token.networks[networkId];
+
+  if (tokenData) {
+    const tokenContract = new web3.eth.Contract(Token.abi, tokenData.address);
+    mainStore.dispatch(networkActions.setTokenContract(tokenContract));
   } else {
     window.alert('Not deployed to network');
   }

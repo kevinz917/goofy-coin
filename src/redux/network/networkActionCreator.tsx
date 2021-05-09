@@ -9,6 +9,7 @@ export const NETWORK_ACTIONS = {
   FETCH_MOCK_ITEM_SUCCESS: 'FETCH_MOCK_ITEM_SUCCESS',
 
   SET_TOKEN_SALE_CONTRACT: 'SET_TOKEN_SALE_CONTRACT',
+  SET_TOKEN_CONTRACT: 'SET_TOKEN_CONTRACT',
 
   SET_IMAGES: 'SET_IMAGES',
 
@@ -29,9 +30,14 @@ export default {
     return actionCreator(NETWORK_ACTIONS.FETCH_MOCK_ITEM_SUCCESS, { item });
   },
 
+  // Contracts
   setTokenSaleContract(contract: any): Action {
     return actionCreator(NETWORK_ACTIONS.SET_TOKEN_SALE_CONTRACT, { contract });
   },
+  setTokenContract(contract: any): any {
+    return actionCreator(NETWORK_ACTIONS.SET_TOKEN_CONTRACT, { contract });
+  },
+
   setImages(images: any[]): Action {
     return actionCreator(NETWORK_ACTIONS.SET_IMAGES, { images });
   },

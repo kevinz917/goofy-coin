@@ -22,11 +22,17 @@ contract TokenSale {
 
     function buyTokens(uint256 _amount) public payable {
         require(msg.value == multiply(_amount, tokenPrice));
-        require(tokenContract.balanceOf(this) >= _amount);
+        require(tokenContract.balanceOf(address(this)) >= _amount);
         require(tokenContract.transfer(msg.sender, _amount));
 
         tokensSold += _amount;
 
         emit Sell(msg.sender, _amount);
+    }
+
+    // Ending token sale
+    function endSale() public {
+        require(msg.sender == admin);
+        require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
     }
 }

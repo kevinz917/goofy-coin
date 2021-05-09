@@ -8,11 +8,13 @@ interface homeOwnProps {
 
 interface mapStateOwnProps {
   tokenSaleContract: any;
+  tokenContract: any;
 }
 
 const mapStateToProps = (state: any): mapStateOwnProps => {
   return {
     tokenSaleContract: state.network.contracts.tokenSale,
+    tokenContract: state.network.contracts.token,
   };
 };
 
@@ -28,10 +30,14 @@ class Home extends Component<homeAllProps> {
   }
 
   async componentDidMount() {
-    const { tokenSaleContract } = this.props;
+    const { tokenSaleContract, tokenContract } = this.props;
 
-    let tokenSupply = await tokenSaleContract.methods.tokenSupply().call();
-    console.log(tokenSupply);
+    // let tokensSold = await tokenSaleContract.methods.tokensSold().call();
+    // console.log(tokensSold);
+
+    // token Name
+    let tokenName = await tokenContract.methods.tokenName().call();
+    console.log(tokenName);
   }
 
   render() {
