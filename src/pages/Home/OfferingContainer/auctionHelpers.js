@@ -1,13 +1,14 @@
-import Web3 from 'web3';
 import { mainStore } from '../../../index';
+
+import { TOKEN_SALE_CONTRACT_ADDRESS } from '../../../common/constants/networkConstants';
 
 export const fetchAuctionInfo = async () => {
   const tokenSaleContract = mainStore.getState().network.contracts.tokenSale;
-
-  console.log(tokenSaleContract);
+  const tokenContract = mainStore.getState().network.contracts.token;
 
   const price = await tokenSaleContract.methods.tokenPrice().call();
-  console.log(price);
 
-  return { price: price / 1000000000000000000 };
+  const reserve = await tokenContract.methods.balanceOf(TOKEN_SALE_CONTRACT_ADDRESS).call();
+
+  return { price: price / Math.pow(10, 18), reserve };
 };

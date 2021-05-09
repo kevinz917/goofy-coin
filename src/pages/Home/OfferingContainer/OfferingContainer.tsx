@@ -17,11 +17,13 @@ const mapStateToProps = (state: any) => {
 
 const OfferingContainer = () => {
   const [price, setPrice] = useState('');
+  const [reserve, setReserve] = useState('');
 
   useEffect(() => {
     const onMount = async () => {
       const auctionInfo: any = await fetchAuctionInfo();
       setPrice(auctionInfo.price);
+      setReserve(auctionInfo.reserve);
     };
 
     onMount();
@@ -41,8 +43,13 @@ const OfferingContainer = () => {
         </div>
 
         <div className="vertical-container">
-          <div className="body1 secondary">Token price</div>
+          <div className="body1 secondary">Coin price</div>
           <div className="header1">{`${price} Ξ`}</div>
+        </div>
+
+        <div className="vertical-container">
+          <div className="body1 secondary">Coins left</div>
+          <div className="header1">{reserve}</div>
         </div>
       </div>
 

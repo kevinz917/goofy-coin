@@ -21,13 +21,12 @@ export const loadBlockchainData = async () => {
   const web3 = window.web3;
 
   const accounts = await window.web3.eth.getAccounts();
-  console.log('Account address: ', accounts[0]);
+  console.log('Current wallet address: ', accounts[0]);
 
   mainStore.dispatch(networkActions.setAccount(accounts[0]));
 
   const networkId = await web3.eth.net.getId();
-
-  const tokenSaleNetworkData = TokenSale.networks[networkId]; //from json
+  const tokenSaleNetworkData = TokenSale.networks[networkId];
 
   if (tokenSaleNetworkData) {
     const tokenSaleContract = new web3.eth.Contract(TokenSale.abi, tokenSaleNetworkData.address);
