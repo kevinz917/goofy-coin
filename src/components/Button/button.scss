@@ -2,16 +2,15 @@
 
 .button-default {
   color: white;
-  background-color: $primary;
-  padding: 12px 12px;
+  padding: 12px 16px;
   outline: none;
-  border-radius: 4px;
+  border-radius: 6px;
   border-style: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   margin: 6px 0px;
 
-  min-width: 100px;
+  min-width: 130px;
   cursor: pointer;
   transition: 0.2s;
   display: inline-block;
@@ -21,12 +20,22 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+
+  background-size: 300% 100%;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  background-image: linear-gradient(to right, #4d49ff, #bc2fff);
 }
 
 .button-default:hover {
-  background-color: $primary-dark;
-  transition: 0.2s;
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
+
+//
 
 .button-secondary {
   color: $secondary !important;
@@ -36,4 +45,30 @@
   pointer-events: none;
   opacity: 0.3;
   transform: none;
+}
+
+.btn-hover {
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }

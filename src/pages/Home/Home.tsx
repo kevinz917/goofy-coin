@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Home.scss';
+import OfferingContainer from './OfferingContainer/OfferingContainer';
 
 interface homeOwnProps {
   loading: boolean;
@@ -41,7 +42,11 @@ class Home extends Component<homeAllProps> {
   }
 
   render() {
-    return <div>Placeholder Text</div>;
+    return (
+      <div className="main-container">
+        <OfferingContainer />
+      </div>
+    );
   }
 }
 

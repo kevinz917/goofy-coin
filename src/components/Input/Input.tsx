@@ -7,14 +7,15 @@ interface inputOwnProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width: string;
   placeholder: string;
+  className?: string;
 }
 
 const Input = (props: inputOwnProps) => {
-  const { value, onChange, width, placeholder } = props;
+  const { value, onChange, width, placeholder, className } = props;
 
   return (
     <input
-      className="input-main"
+      className={`${className} input-main`}
       value={value}
       onChange={onChange}
       style={{ width: width }}
