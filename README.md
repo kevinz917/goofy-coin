@@ -1,2 +1,3 @@
-# decentragram
-Decetralized instagram as my first starter project building a DAPP
+# Goofy Coin
+
+Test ICO platform
