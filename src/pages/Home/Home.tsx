@@ -30,9 +30,8 @@ class Home extends Component<homeAllProps> {
   async componentDidMount() {
     const { tokenSaleContract } = this.props;
 
-    let tokenPrice = await tokenSaleContract.methods.tokenPrice().call();
     let tokenSupply = await tokenSaleContract.methods.tokenSupply().call();
-    console.log(tokenPrice, tokenSupply);
+    console.log(tokenSupply);
   }
 
   render() {

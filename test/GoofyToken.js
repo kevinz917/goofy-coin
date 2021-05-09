@@ -40,4 +40,40 @@ contract('Goofy Token', ([deployer, author, tipper]) => {
       assert.equal(deployerBalance, 90);
     });
   });
+
+  describe('Approval', async () => {
+    it('Successful approval', async () => {
+      let instance = await GoofyToken.deployed();
+
+      let receipt = await instance.approve(author, 10);
+      assert.equal(receipt.logs.length, 1, 'Trigger one event');
+      assert.equal(receipt.logs[0].args._value, 10, 'Has correct transfer value');
+    });
+
+    it('Approval allocated into allowance', async () => {
+      let instance = await GoofyToken.deployed();
+
+      let allowance = await instance.allowance(deployer, author);
+      assert.equal(allowance, 10);
+    });
+  });
+
+  describe('TransferFrom method', async () => {
+    it('Issue approval', async () => {
+      let instance = await GoofyToken.deployed();
+
+      let receipt = await instance.approve(author, 10, { from: deployer });
+      assert.equal(receipt.logs[0].args._value, 10, 'Has correct transfer value');
+
+      // Delegated transfer event
+      let delegatedTransferResult = await instance.transferFrom(deployer, author, 1, {
+        from: author,
+      });
+      assert.equal(delegatedTransferResult.logs[0].args._value, 1);
+
+      // Allowance after delegated transfer
+      let allowanceAfterTransfer = await instance.allowance(deployer, author);
+      assert.equal(allowanceAfterTransfer, 9);
+    });
+  });
 });
